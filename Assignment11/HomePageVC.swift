@@ -37,7 +37,7 @@ class HomePageVC: UIViewController {
     //MARK: - Setup UI
     func setUpPushPaletteButton() {
         
-        pushPaletteButton.frame = CGRect(x: 270, y: 0, width: 200, height: 45)
+        pushPaletteButton.frame = CGRect(x: 150, y: 10, width: 200, height: 45)
         view.addSubview(pushPaletteButton)
         
         let anotherColorPalette = ColorPaletteVC()
