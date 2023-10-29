@@ -8,55 +8,88 @@
 import UIKit
 
 class HomePageVC: UIViewController {
+    
+    private let buttonsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
 
-    let presentPaletteButton: UIButton = {
+    private let presentPaletteButton: UIButton = {
        
-        let button = UIButton()
-        button.setTitle("Color Palette Page", for: .normal)
-        button.backgroundColor = .purple
+        let button = UIButton(type: .system)
+        button.setTitle("Present Color Palette Page", for: .normal)
+        button.backgroundColor = .systemPink
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
-    let pushPaletteButton: UIButton = {
+    private let pushPaletteButton: UIButton = {
        
-        let button = UIButton()
-        button.setTitle("Color Palette Page", for: .normal)
-        button.backgroundColor = .purple
+        let button = UIButton(type: .system)
+        button.setTitle("Push Color Palette Page", for: .normal)
+        button.backgroundColor = .systemPink
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
-        setUpPushPaletteButton()
-        setUpPresentPaletteButton()
+        view.backgroundColor = .purple
+        view.addSubview(buttonsView)
+        buttonsView.addSubview(presentPaletteButton)
+        buttonsView.addSubview(pushPaletteButton)
+        setUpAutoLayout()
+        
             }
 
     //MARK: - Setup UI
-    func setUpPushPaletteButton() {
+    private func setUpAutoLayout() {
+        //MARK: - buttonsView Constraints
+        buttonsView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        buttonsView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        buttonsView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
+        buttonsView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        pushPaletteButton.frame = CGRect(x: 150, y: 10, width: 200, height: 45)
-        view.addSubview(pushPaletteButton)
+        //MARK: - presentPaletteButton Constraints
+        presentPaletteButton.leftAnchor.constraint(equalTo: buttonsView.leftAnchor, constant: 20).isActive = true
+        presentPaletteButton.rightAnchor.constraint(equalTo: buttonsView.rightAnchor, constant: -20).isActive = true
+        presentPaletteButton.topAnchor.constraint(equalTo: buttonsView.topAnchor, constant: 40).isActive = true
+        presentPaletteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        setUpPresentPaletteButton()
+        
+        //MARK: - pushPaletteButton Constraints
+        pushPaletteButton.topAnchor.constraint(equalTo: presentPaletteButton.bottomAnchor, constant: 40).isActive = true
+        pushPaletteButton.leftAnchor.constraint(equalTo: buttonsView.leftAnchor, constant: 20).isActive = true
+        pushPaletteButton.rightAnchor.constraint(equalTo: buttonsView.rightAnchor, constant: -20).isActive = true
+        pushPaletteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        setUpPushPaletteButton()
+    }
+    
+    private func setUpPushPaletteButton() {
         let anotherColorPalette = ColorPaletteVC()
-        
         self.navigationController?.pushViewController(anotherColorPalette, animated: true)
     }
     
-    func setUpPresentPaletteButton() {
-        presentPaletteButton.frame = CGRect(x: 150, y: 100, width: 200, height: 45)
-        view.addSubview(presentPaletteButton)
-        
+    private func setUpPresentPaletteButton() {
         presentPaletteButton.addAction(UIAction(handler: { [weak self] action in
             self?.navigateToColorPalette()
         }), for: .touchUpInside)
     }
     
     //MARK: - Navigation
-    func navigateToColorPalette() {
-        
+    private func navigateToColorPalette() {
         let colorPalette = ColorPaletteVC()
         self.present(colorPalette, animated: true)
     }

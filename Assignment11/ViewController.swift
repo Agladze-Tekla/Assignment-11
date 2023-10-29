@@ -59,11 +59,6 @@ class ViewController: UIViewController {
         loginContentView.addSubview(signInButton)
         view.addSubview(loginContentView)
         setUpAutoLayout()
-        
-        signInButton.addAction(UIAction(handler: { [weak self] action in
-            self?.navigateToHomePage()
-        }), for: .touchUpInside)
-        
     }
     
     //MARK: - SetUp Layout
@@ -91,12 +86,28 @@ class ViewController: UIViewController {
         signInButton.leftAnchor.constraint(equalTo: loginContentView.leftAnchor, constant: 20).isActive = true
         signInButton.rightAnchor.constraint(equalTo: loginContentView.rightAnchor, constant: -20).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        setUpSignInButton()
+    }
+    
+    private func setUpSignInButton() {
+        signInButton.addAction(UIAction(handler: { [weak self] action in
+            self?.navigateToHomePage()
+        }), for: .touchUpInside)
     }
     
     
-    func navigateToHomePage() {
-        let homePage = HomePageVC()
-        self.present(homePage, animated: true)
+    private func navigateToHomePage() {
+       // let homePage = HomePageVC()
+       // self.present(homePage, animated: true)
+        
+        if usernameTextField.text == nil || passwordTextField.text == nil {
+            usernameTextField.text = "Please Write The Username"
+            passwordTextField.text = "Please write the password"
+        } else {
+            let homePage = HomePageVC()
+            self.present(homePage, animated: true)
+        }
     }
 }
 

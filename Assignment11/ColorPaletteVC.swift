@@ -8,100 +8,312 @@
 import UIKit
 
 class ColorPaletteVC: UIViewController {
-    let buttonBackgroundLabel: UILabel = {
-       
+    
+    private let colorView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    //MARK: - "Button" color palette stackViews
+    private let buttonColorStack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        return stack
+    }()
+    
+    private let buttonColorStack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        return stack
+    }()
+    
+    //MARK: - "Backgorund" color palette stackViews
+    private let backgroundColorStack1: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        return stack
+    }()
+    
+    private let backgroundColorStack2: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        return stack
+    }()
+    
+    //MARK: - Labels
+    private let buttonColorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Change Home Buttons Background Colors"
         label.backgroundColor = .purple
+        label.text = "Change Home Buttons Background Colors"
+        label.font = .systemFont(ofSize: 20)
+        label.numberOfLines = 2
+        label.textColor = .white
+        label.textAlignment = .center
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
     
-    let backgroundLabel: UILabel = {
+    private let backgroundColorLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .purple
         label.text = "Change Home Background Color"
-        label.backgroundColor = .systemPink
+        label.font = .systemFont(ofSize: 20)
+        label.numberOfLines = 2
+        label.textColor = .white
+        label.textAlignment = .center
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
     
+   
+    //MARK: - "Button" color palette buttons
+    private let butRed: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .red
+        button.setTitle("Red", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let butOrange: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .orange
+        button.setTitle("Orange", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let butYellow: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .yellow
+        button.setTitle("Yellow", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let butGreen: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .green
+        button.setTitle("Green", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let butBlue: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .blue
+        button.setTitle("Blue", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let butIndigo: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemIndigo
+        button.setTitle("Indigo", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    //MARK: - "Background" color palette buttons
+    private let bacRed: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .red
+        button.setTitle("Red", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let bacOrange: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .orange
+        button.setTitle("Orange", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let bacYellow: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .yellow
+        button.setTitle("Yellow", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let bacGreen: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .green
+        button.setTitle("Green", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let bacBlue: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .blue
+        button.setTitle("Blue", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let bacIndigo: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .systemIndigo
+        button.setTitle("Indigo", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
-        setUpButtonBackground()
-        setUpBacgroundLabel()
-        createColors()
+        view.backgroundColor = .systemPink
+        view.addSubview(colorView)
+        colorView.addSubview(buttonColorLabel)
+        colorView.addSubview(backgroundColorLabel)
+        colorView.addSubview(buttonColorStack1)
+        colorView.addSubview(buttonColorStack2)
+        colorView.addSubview(backgroundColorStack1)
+        colorView.addSubview(backgroundColorStack2)
+    
+        buttonColorStack1.addArrangedSubview(butRed)
+        buttonColorStack1.addArrangedSubview(butOrange)
+        buttonColorStack1.addArrangedSubview(butYellow)
+        buttonColorStack2.addArrangedSubview(butGreen)
+        buttonColorStack2.addArrangedSubview(butBlue)
+        buttonColorStack2.addArrangedSubview(butIndigo)
+        backgroundColorStack1.addArrangedSubview(bacRed)
+        backgroundColorStack1.addArrangedSubview(bacOrange)
+        backgroundColorStack1.addArrangedSubview(bacYellow)
+        backgroundColorStack2.addArrangedSubview(bacGreen)
+        backgroundColorStack2.addArrangedSubview(bacBlue)
+        backgroundColorStack2.addArrangedSubview(bacIndigo)
+ 
+        setUpAutoLayout()
+    }
+    
+    //MARK: - SetUp AutoLayout
+    private func setUpAutoLayout() {
+        
+        //MARK: - colorView Constraints
+        colorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        colorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        colorView.heightAnchor.constraint(equalToConstant: view.frame.height*2/3).isActive = true
+        colorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        //MARK: - buttonColorLabel Constraints
+        buttonColorLabel.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        buttonColorLabel.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        buttonColorLabel.topAnchor.constraint(equalTo: colorView.topAnchor, constant: 20).isActive = true
+        
+        //MARK: - "Button" color stackViews Constraints
+        buttonColorStack1.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        buttonColorStack1.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        buttonColorStack1.topAnchor.constraint(equalTo: buttonColorLabel.bottomAnchor, constant: 20).isActive = true
+        buttonColorStack1.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        buttonColorStack2.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        buttonColorStack2.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        buttonColorStack2.topAnchor.constraint(equalTo: buttonColorStack1.bottomAnchor, constant: 10).isActive = true
+        buttonColorStack2.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        //MARK: - backgroundColorLabel Constraints
+        backgroundColorLabel.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        backgroundColorLabel.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        backgroundColorLabel.topAnchor.constraint(equalTo: buttonColorStack2.bottomAnchor, constant: 20).isActive = true
+        
+        //MARK: - "Background" color stackViews Constraints
+        backgroundColorStack1.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        backgroundColorStack1.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        backgroundColorStack1.topAnchor.constraint(equalTo: backgroundColorLabel.bottomAnchor, constant: 20).isActive = true
+        backgroundColorStack1.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        backgroundColorStack2.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
+        backgroundColorStack2.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
+        backgroundColorStack2.topAnchor.constraint(equalTo: backgroundColorStack1.bottomAnchor, constant: 10).isActive = true
+        backgroundColorStack2.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
         
     }
     
-    //MARK: - SetUp UI
-    func setUpButtonBackground() {
-        buttonBackgroundLabel.frame = CGRect(x: 50, y: 100, width: 220, height: 40)
-        view.addSubview(buttonBackgroundLabel)
-    }
-
-    func setUpBacgroundLabel() {
-        backgroundLabel.frame = CGRect(x: 50, y: 200, width: 220, height: 40)
-        view.addSubview(backgroundLabel)
-    }
-
-    func createColors() {
-        let red = UIButton()
-        red.setTitle("Red", for: .normal)
-        red.backgroundColor = UIColor.red
-        
-        let orange = UIButton()
-        orange.setTitle("Orange", for: .normal)
-        orange.backgroundColor = UIColor.orange
-        
-        let yellow = UIButton()
-        yellow.setTitle("Yellow", for: .normal)
-        yellow.backgroundColor = UIColor.yellow
-        
-        let green = UIButton()
-        green.setTitle("Green", for: .normal)
-        green.backgroundColor = UIColor.green
-        
-        let blue = UIButton()
-        blue.setTitle("Blue", for: .normal)
-        blue.backgroundColor = UIColor.blue
-        
-        let purple = UIButton()
-        purple.setTitle("Purple", for: .normal)
-        purple.backgroundColor = UIColor.purple
-    
-    
-    func setUpButtonStackColors() {
-        let stackView = UIStackView()
-        stackView.axis = NSLayoutConstraint.Axis.vertical
-        stackView.distribution = UIStackView.Distribution.equalCentering
-        stackView.alignment = UIStackView.Alignment.center
-       stackView.frame = CGRect(x: 50, y: 150, width: 240, height: 50)
-        view.addSubview(stackView)
-        
-        stackView.addArrangedSubview(red)
-        stackView.addArrangedSubview(orange)
-        stackView.addArrangedSubview(yellow)
-        stackView.addArrangedSubview(green)
-        stackView.addArrangedSubview(blue)
-        stackView.addArrangedSubview(purple)
-    }
-        func setUpBackgroundColors() {
-            let stackView = UIStackView()
-            stackView.axis = NSLayoutConstraint.Axis.vertical
-            stackView.distribution = UIStackView.Distribution.equalCentering
-            stackView.alignment = UIStackView.Alignment.center
-            stackView.frame = CGRect(x: 50, y: 250, width: 240, height: 50)
-            view.addSubview(stackView)
-            
-            stackView.addArrangedSubview(red)
-            stackView.addArrangedSubview(orange)
-            stackView.addArrangedSubview(yellow)
-            stackView.addArrangedSubview(green)
-            stackView.addArrangedSubview(blue)
-            stackView.addArrangedSubview(purple)
-            
-        }
-        
-    }
 }
