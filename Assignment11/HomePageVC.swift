@@ -7,7 +7,17 @@
 
 import UIKit
 
-class HomePageVC: UIViewController {
+protocol HomeViewDelegate: AnyObject {
+    func didTapEnableButton(color: UIColor)
+}
+
+class HomePageVC: UIViewController, HomeViewDelegate {
+    
+    func didTapEnableButton(color: UIColor) {
+        pushPaletteButton.backgroundColor = color
+        presentPaletteButton.backgroundColor = color
+    }
+    
     
     private let buttonsView: UIView = {
         let view = UIView()
@@ -49,7 +59,6 @@ class HomePageVC: UIViewController {
         buttonsView.addSubview(presentPaletteButton)
         buttonsView.addSubview(pushPaletteButton)
         setUpAutoLayout()
-        
             }
 
     //MARK: - Setup UI
@@ -79,14 +88,19 @@ class HomePageVC: UIViewController {
     
     private func setUpPushPaletteButton() {
         let anotherColorPalette = ColorPaletteVC()
+        anotherColorPalette.delegate = self
         self.navigationController?.pushViewController(anotherColorPalette, animated: true)
     }
     
     private func setUpPresentPaletteButton() {
-        presentPaletteButton.addAction(UIAction(handler: { [weak self] action in
+        let anotherColorPalette = ColorPaletteVC()
+        anotherColorPalette.delegate = self
+        self.presentPaletteButton.addAction(UIAction(handler: { [weak self] action in
             self?.navigateToColorPalette()
         }), for: .touchUpInside)
     }
+    
+    
     
     //MARK: - Navigation
     private func navigateToColorPalette() {

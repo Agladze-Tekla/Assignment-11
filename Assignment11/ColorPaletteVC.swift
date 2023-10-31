@@ -7,7 +7,25 @@
 
 import UIKit
 
+
 class ColorPaletteVC: UIViewController {
+    
+    
+    weak var delegate: HomeViewDelegate?
+    
+    @objc private func didTapButton(color: UIColor ) {
+        butRed.addAction(UIAction(handler: { [weak self] action in
+            self?.delegate?.didTapEnableButton(color: .red)
+        }), for: .touchUpInside)
+        butRed.addAction(UIAction(handler: { [weak self] action in
+            self?.navigateToHomePage()
+        }), for: .touchUpInside)
+    }
+    
+    private func navigateToHomePage() {
+        let homePage = HomePageVC()
+        self.present(homePage, animated: true)
+    }
     
     private let colorView: UIView = {
        let view = UIView()
@@ -270,8 +288,48 @@ class ColorPaletteVC: UIViewController {
         backgroundColorStack2.addArrangedSubview(bacIndigo)
  
         setUpAutoLayout()
+        
+        butRed.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        butOrange.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        butYellow.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        butGreen.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        butBlue.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        butIndigo.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+     
+        bacRed.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bacOrange.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bacYellow.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bacGreen.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bacBlue.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        bacIndigo.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        
+
+        
+        
+        /*
+        butRed.addTarget(self, action: #selector(didTapButton(color: .red)), for: .touchUpInside)
+        butOrange.addTarget(self, action: #selector(didTapButton(color: .orange)), for: .touchUpInside)
+        butYellow.addTarget(self, action: #selector(didTapButton(color: .yellow)), for: .touchUpInside)
+        butGreen.addTarget(self, action: #selector(didTapButton(color: .green)), for: .touchUpInside)
+        butBlue.addTarget(self, action: #selector(didTapButton(color: .green)), for: .touchUpInside)
+        butIndigo.addTarget(self, action: #selector(didTapButton(color: .systemIndigo)), for: .touchUpInside)
+     
+        
+        bacRed.addTarget(self, action: #selector(didTapButton(color: .red)), for: .touchUpInside)
+        bacOrange.addTarget(self, action: #selector(didTapButton(color: .orange)), for: .touchUpInside)
+        bacYellow.addTarget(self, action: #selector(didTapButton(color: .yellow)), for: .touchUpInside)
+        bacGreen.addTarget(self, action: #selector(didTapButton(color: .green)), for: .touchUpInside)
+        bacBlue.addTarget(self, action: #selector(didTapButton(color: .blue)), for: .touchUpInside)
+        bacIndigo.addTarget(self, action: #selector(didTapButton(color: .systemIndigo)), for: .touchUpInside)
+        */
+
+        
+        
+        
+        
     }
     
+   
     //MARK: - SetUp AutoLayout
     private func setUpAutoLayout() {
         
@@ -300,7 +358,7 @@ class ColorPaletteVC: UIViewController {
         //MARK: - backgroundColorLabel Constraints
         backgroundColorLabel.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
         backgroundColorLabel.rightAnchor.constraint(equalTo: colorView.rightAnchor, constant: -20).isActive = true
-        backgroundColorLabel.topAnchor.constraint(equalTo: buttonColorStack2.bottomAnchor, constant: 20).isActive = true
+        backgroundColorLabel.topAnchor.constraint(equalTo: buttonColorStack2.bottomAnchor, constant: 60).isActive = true
         
         //MARK: - "Background" color stackViews Constraints
         backgroundColorStack1.leftAnchor.constraint(equalTo: colorView.leftAnchor, constant: 20).isActive = true
@@ -317,3 +375,7 @@ class ColorPaletteVC: UIViewController {
     }
     
 }
+
+
+
+
